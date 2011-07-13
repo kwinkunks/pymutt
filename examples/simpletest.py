@@ -3,16 +3,16 @@
 #@@language python
 #!/usr/bin/env python
 
-'''# a simple test just to see if mtft runs at all.
-#
-#    here's a typical result using fftw3:
-#    
-#        python example/simpletest.py
-#        test series length padded from 716 to 4096
-#        averaging over 20 trials
-#         frequency    real     imag         abs          F
-#         0.06983     4.996    0.095      4.9973     9957.5
-#         0.07263    -0.204   -0.060      0.2130        0.0
+''' a simple test just to see if mtft runs at all.
+
+    here's a typical result using fftw3:
+    
+        python example/simpletest.py
+        test series length padded from 716 to 4096
+        averaging over 20 trials
+         frequency    real     imag         abs          F
+         0.06983     4.996    0.095      4.9973     9957.5
+         0.07263    -0.204   -0.060      0.2130        0.0
     '''
 
 import sys
@@ -46,7 +46,7 @@ nlines = len(lines)
 
 suma = complex(0.0, 0.0) * np.zeros([nlines])
 sumF = None
-sumv = complex(0.0, 0.0) * np.zeros([nlines])
+sumv = np.zeros([nlines])
 
 trials = 20
 
