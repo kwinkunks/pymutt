@@ -1,5 +1,6 @@
 !
-! - about one day of long-period data from Pinion Flat Observatory following a magnitude 8.5 in Chile
+! - about one day of long-period data from Pinion Flat Observatory
+!   following a magnitude 8.5 in Chile
 ! - time series has been resampled from 20 sps down to 0.02 sps
 !
 SPS: 2.000000e-02

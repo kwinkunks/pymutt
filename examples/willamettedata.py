@@ -1,11 +1,13 @@
-#
-#     WILLAMETTE RIVER TIME SERIES (TOP PLOT OF FIGURE 505)
-#     SOURCE: U. S. GEOLOGICAL SURVEY
-#     DELTA T: 1 MONTH
-#     SAMPLE SIZE: 395
-#
-#     NOTE: FIRST 128 VALUES ALSO PLOTTED IN LOWER PLOT OF FIGURE 2
-#
+'''
+     WILLAMETTE RIVER TIME SERIES
+     SOURCE: U. S. GEOLOGICAL SURVEY
+     DELTA T: 1 MONTH
+     SAMPLE SIZE: 395
+'''
+import numpy as np
+import pylab as mpl
+import pymutt
+
 dt = 1.0 / 12.0
 dtunits = "year"
 data = [
@@ -405,3 +407,66 @@ data = [
 8.89762,
 9.06933,
 ]
+
+def doit():
+    '''This code reproduces figure 512 in Percival and Walden.  It (1)
+    analyzes the time series and applies the F-test for spectral
+    lines, (2) extracts the two lines with largest F-test values, and
+    (3) computes the reshaped spectrum.  It then displays the F-test
+    and the original and reshaped spectra as in P&W figure 512.
+    '''
+
+    print doit.__doc__
+
+    global dt, data
+
+    ts = np.array(data)
+    ts -= ts.mean()
+    paddedlen = 1024
+    r = pymutt.mtft(series = ts,
+                    dt = dt,
+                    npi = 4,
+                    nwin = 5,
+                    kind = 2,
+                    paddedlen = paddedlen,
+                    dodof = 1,
+                    )
+
+    Fcpy = np.array(r['F'], copy = 1)
+    flines = []
+    nlines_to_find = 2
+    # For each line, find the maximum current value of the F-test.
+    # Then zero the F-test values in the region fline +- W/2 before
+    # searching for the next largest value.
+    for l in range(nlines_to_find):
+        idxfmax = np.argsort(Fcpy)[-1]
+        fline = r['df'] * idxfmax
+        flines.append(fline)
+        ir = max(0, int(idxfmax + round(0.5 * r['W'] / r['df'])))
+        il = min(r['n'] - 1, int(idxfmax - round(0.5 * r['W'] / r['df'])))
+        Fcpy[il:ir] = 0.0
+
+    reducedr = pymutt.mtft(series = ts,
+                           dt = dt,
+                           npi = 4,
+                           nwin = 5,
+                           kind = 2,
+                           paddedlen = paddedlen,
+                           dodof = 1,
+                           lines = np.array(flines),
+                           )
+
+    f = r['df'] * np.arange(len(r['power']))
+    mpl.subplot(211)
+    mpl.title("Compare with Percival and Walden, figure 512")
+    mpl.plot(f, r['F'])
+    for level in (8.6, 18.5):
+        y = level + 0.0 * r['power']
+        mpl.plot(f, y)
+    mpl.ylabel("F-test")
+    mpl.subplot(212)
+    mpl.plot(f, 10.0 * np.log10(r['power']))
+    mpl.plot(f, 10.0 * np.log10(reducedr['reshaped']))
+    mpl.xlabel("f (cycles/year)")
+    mpl.ylabel("dB")
+    mpl.show()
