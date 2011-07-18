@@ -273,6 +273,7 @@ static char pymutt_mtft_doc[] =
     "  'F'         F-test for spectral line vs frequency\n"
     "  'weights'   nwin-by-nf array of spectral weights\n"
     "  'linea'     estimated line amplitudes (at frequencies in linef)\n"
+    "  'linevar'   estimated line amplitude variance\n"
     "  'reshaped'  spectrum with lines removed and reshaped around holes\n"
     ;
 

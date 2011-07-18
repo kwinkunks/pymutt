@@ -18,8 +18,9 @@ import sys
 import pymutt
 import pylab as mpl
 import numpy as np
+from utilities import mtanalyze
 
-def doit():
+def doit(verbose = 0):
 
     print __doc__
     fn = "chile.txt"
@@ -41,71 +42,19 @@ def doit():
         a = np.array(a)
         f.close()
 
-    # print >> sys.stderr, "read in %d values at %e sps" % (len(a), sps)
+    if verbose:
+        print >> sys.stderr, "read in %d values at %e sps" % (len(a), sps)
 
-    # select a padded length that is a power of 2
-    n2 = 2
-    while n2 < len(a):
-        n2 *= 2
-    paddedlen = 32 * n2
+    r = mtanalyze(a,
+                  dt = 1.0/sps,
+                  kind = 1,
+                  npi = 4,
+                  nwin = 7,
+                  padby = 32,
+                  nlines = 9,
+                  linedomain = [0.0015, 0.003],
+                  doplot = 1,
+                  verbose = verbose,
+                  )
 
-    # print >> sys.stderr, "padded to %d" % paddedlen
-
-    kind = 2
-    npi = 4
-    nwin = 7
-    dt = 1.0 / sps
-    nlines_to_find = 9
-
-    mpl.subplot(211)
-    r = pymutt.mtft(a,
-                    dt = dt,
-                    kind = kind,
-                    npi = npi,
-                    nwin = nwin,
-                    paddedlen =  paddedlen,
-                    dodof = 1,
-                    )
-    freq = 1000.0 * r['df'] * np.arange(len(r['power']))
-    il = int(round(1.5 / (1000.0 * r['df'])))
-    ir = 2 * il
-
-    Fcpy = np.array(r['F'], copy = 1)
-    flines = []
-    # For each line, find the maximum current value of the F-test.
-    # Then zero the F-test values in the region fline +- W/2 before
-    # searching for the next largest value.
-    Fmin = Fcpy.min()
-    while len(flines) < nlines_to_find:
-        idxfmax = np.argsort(Fcpy)[-1]
-        if idxfmax >= il and idxfmax <= ir:
-            fline = r['df'] * idxfmax
-            flines.append(fline)
-            print >> sys.stderr, "%3d  %13.6e" % (len(flines), fline)
-        # print >> sys.stderr, idxfmax
-        wl = max(0, int(idxfmax - round(0.5 * r['W'] / r['df'])))
-        wr = min(r['n'] - 1, int(idxfmax + round(0.5 * r['W'] / r['df'])))
-        Fcpy[wl:wr] = Fmin
-
-    mpl.subplot(212)
-    mpl.plot(freq[il:ir], r['F'][il:ir])
-    mpl.xlabel('mHz')
-    mpl.ylabel('F')
-
-    reducedr = pymutt.mtft(series = a,
-                           dt = dt,
-                           npi = npi,
-                           nwin = nwin,
-                           kind = kind,
-                           paddedlen = paddedlen,
-                           dodof = 1,
-                           lines = np.array(flines),
-                           )
-
-    mpl.subplot(211)
-    mpl.plot(freq[il:ir], 10.0 * np.log10(r['power'][il:ir]))
-    mpl.ylabel('dB')
-    mpl.plot(freq[il:ir], 10.0 * np.log10(reducedr['reshaped'][il:ir]))
-    for line in flines:
-        mpl.plot((1000.0 * line, 1000.0 * line), (80.0, 120.0))
-    mpl.show()
+    return r

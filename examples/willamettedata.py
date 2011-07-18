@@ -408,7 +408,7 @@ data = [
 9.06933,
 ]
 
-def doit():
+def doit(verbose = 0):
     '''This code reproduces figure 512 in Percival and Walden.  It (1)
     analyzes the time series and applies the F-test for spectral
     lines, (2) extracts the two lines with largest F-test values, and

@@ -22,7 +22,7 @@ import numpy as np
 from numpy.random import normal
 import pymutt
 
-def doit():
+def doit(verbose = 0):
     # pick a miscellaneous length and then find a much bigger power-of-2
 
     n = 716
