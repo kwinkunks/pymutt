@@ -1,11 +1,17 @@
-# 
-#      data from Percival & Walden
-#      
-#      OCEAN WAVE TIME SERIES (FIGURE 295)
-#      SOURCE: APPLIED PHYSICS LABORATORY (ANDY JESSUP)
-#      DELTA T: 0.25 SECONDS
-#      SAMPLE SIZE: 1024
-# 
+'''
+      ocean wave time series from Percival & Walden, figure 295.
+      source: Applied Physics Laboratory (Andy Jessup)
+
+      This example computes an adaptive multi-taper (kind == 1) result
+      that should be compared to the heavy curve in P&W figure 373(c).
+''' 
+
+import sys
+import pymutt
+import matplotlib.pyplot as mpl
+import numpy as np
+from utilities import mtanalyze
+
 
 dt = 0.25
 dtunits = "second"
@@ -105,3 +111,21 @@ data = [
     539, 595, 620, 588, 500, 372, 242, 137, 73, 43, 23,
     15, 14, 6, -25, -88, -167, -239, -279, -270, -210, -113,
 ]
+
+def doit(verbose = 0):
+
+    print __doc__
+
+    a = np.array(data)
+    r = mtanalyze(a - a.mean(),
+                  dt = dt,
+                  kind = 1,
+                  npi = 4,
+                  nwin = 10,
+                  padby = 0,
+                  doplot = 1,
+                  verbose = verbose,
+                  title = "Adaptive Multi-taper of Ocean Wave Data",
+                  )
+
+    return r

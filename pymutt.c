@@ -1,9 +1,3 @@
-//@+leo-ver=4
-//@+node:@file pymutt.c
-//@@language c
-//@@tabwidth -4
-//@+others
-//@+node:pymutt_mtft
 #include <Python.h>
 #include <numpy/arrayobject.h>
 #include <math.h>
@@ -229,8 +223,6 @@ static PyObject* pymutt_mtft(PyObject* self,
     return rd;
 
 }
-//@-node:pymutt_mtft
-//@+node:initpymutt
 
 /* Doc strings: */
 
@@ -300,7 +292,4 @@ void initpymutt(void)
     Py_InitModule3("pymutt", pymutt_methods, pymutt_module_doc);
     import_array();   /* required NumPy initialization */
 }
-//@-node:initpymutt
-//@-others
-//@-node:@file pymutt.c
-//@-leo
+

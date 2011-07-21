@@ -5,7 +5,7 @@
      SAMPLE SIZE: 395
 '''
 import numpy as np
-import pylab as mpl
+import matplotlib.pyplot as mpl
 import pymutt
 
 dt = 1.0 / 12.0

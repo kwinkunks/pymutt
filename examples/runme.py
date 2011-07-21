@@ -12,6 +12,7 @@ test cases are:
     1    simple randomly-generated fourier line extraction
     2    analysis of a seismograph record
     3    willamette river flow data
+    4    ocean wave data
 '''
 
 import sys
@@ -23,6 +24,7 @@ import pymutt
 import simpletest as t1
 import freeosc as t2
 import willamettedata as t3
+import oceanwavedata as t4
 
 class Usage(Exception):
     def __init__(self, msg):
@@ -59,6 +61,8 @@ def main(argv=None):
             raise Usage(msg)
 
         if len(cases) == 0:
+            print >> sys.stderr, __doc__
+            print >> sys.stderr, "----- pymutt usage -----"
             print >> sys.stderr, pymutt.mtft.__doc__
             return 0
 
@@ -70,6 +74,8 @@ def main(argv=None):
                 t2.doit()
             elif c == 3:
                 t3.doit()
+            elif c == 4:
+                t4.doit()
             else:
                 print >> sys.stderr, "unknown case %s" % c
                 return 2

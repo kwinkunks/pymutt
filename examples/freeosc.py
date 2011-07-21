@@ -16,7 +16,7 @@ residual structure in the reshaped power spectrum.
 
 import sys
 import pymutt
-import pylab as mpl
+import matplotlib.pyplot as mpl
 import numpy as np
 from utilities import mtanalyze
 

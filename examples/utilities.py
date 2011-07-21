@@ -1,11 +1,11 @@
-'''interface to pymutt.mtft that incudes line detection and extraction
+'''interface to pymutt.mtft that includes line detection and extraction
 as well as simple plotting support if the pylab package is available.'''
 
 import sys
 from math import floor, ceil
 import pymutt
 try:
-    import pylab as mpl
+    import matplotlib.pyplot as mpl
 except:
     mpl = None
 import numpy as np
@@ -19,6 +19,8 @@ def mtanalyze(data,
               nlines = 0,   # number of lines to find
               linedomain = None,  # could be a range of frequencies to search
               doplot = 0,
+              title = None,
+              title2 = None,
               verbose = 0,
               ):
 
@@ -85,11 +87,15 @@ def mtanalyze(data,
             ir = int(ceil(linedomain[1] / r['df']))
         if nlines:
             mpl.subplot(212)
+            if title2:
+                mpl.title(title2)
             mpl.plot(r['f'][il:ir], r['F'][il:ir])
             mpl.ylabel('F')
-        mpl.xlabel('Hz')
+        mpl.xlabel('frequency')
         if nlines:
             mpl.subplot(211)
+        if title:
+            mpl.title(title)
         mpl.plot(r['f'][il:ir], 10.0 * np.log10(r['power'][il:ir]))
         mpl.ylabel('dB')
         if r.has_key('reshaped'):
