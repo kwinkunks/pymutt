@@ -54,6 +54,7 @@ def doit(verbose = 0):
                   nlines = 9,
                   linedomain = [0.0015, 0.003],
                   doplot = 1,
+                  title = "Free Oscillations of the Earth",
                   verbose = verbose,
                   )
 

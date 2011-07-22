@@ -13,6 +13,7 @@ test cases are:
     2    analysis of a seismograph record
     3    willamette river flow data
     4    ocean wave data
+    5    ar(4) data
 '''
 
 import sys
@@ -25,6 +26,7 @@ import simpletest as t1
 import freeosc as t2
 import willamettedata as t3
 import oceanwavedata as t4
+import ar4data as t5
 
 class Usage(Exception):
     def __init__(self, msg):
@@ -76,6 +78,8 @@ def main(argv=None):
                 t3.doit()
             elif c == 4:
                 t4.doit()
+            elif c == 5:
+                t5.doit()
             else:
                 print >> sys.stderr, "unknown case %s" % c
                 return 2

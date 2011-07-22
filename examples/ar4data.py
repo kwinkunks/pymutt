@@ -1,12 +1,20 @@
-#
-#     data from Percival & Walden
-#
-#     SIMULATED AR(4) TIME SERIES (LOWER PLOT OF FIGURE 45)
-#     SOURCE: APPLIED PHYSICS LABORATORY (DON PERCIVAL)
-#     DELTA T: 1
-#     SAMPLE SIZE: 1024
-#
-dt = 0.25
+'''
+     data from Percival & Walden
+
+     SIMULATED AR(4) TIME SERIES (LOWER PLOT OF FIGURE 45)
+     SOURCE: APPLIED PHYSICS LABORATORY (DON PERCIVAL)
+     DELTA T: 1
+     SAMPLE SIZE: 1024
+'''
+
+import sys
+import pymutt
+import matplotlib.pyplot as mpl
+import numpy as np
+from utilities import mtanalyze
+
+
+dt = 1.00
 dtunits = ""
 data = [
 	-41.461235,
@@ -1034,4 +1042,23 @@ data = [
 	1.8532828,
 	11.5201845,
 ]
+
+
+def doit(verbose = 0):
+
+    print __doc__
+
+    a = np.array(data)
+    r = mtanalyze(a - a.mean(),
+                  dt = dt,
+                  kind = 2,
+                  npi = 4,
+                  nwin = 7,
+                  padby = 0,
+                  doplot = 1,
+                  verbose = verbose,
+                  title = "Adaptive Multi-taper of AR(4)",
+                  )
+
+    return r
 
