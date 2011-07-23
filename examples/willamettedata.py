@@ -427,7 +427,7 @@ def doit(verbose = 0):
                     dt = dt,
                     npi = 4,
                     nwin = 5,
-                    kind = 2,
+                    kind = 1,
                     paddedlen = paddedlen,
                     dodof = 1,
                     )
