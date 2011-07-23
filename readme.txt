@@ -43,11 +43,13 @@ pymutt.  To run a test case try
 and you should get a figure closely resembling Percival and Walden
 figure 512.
 
+Look at the code in examples/minimalexamples.py for some easy-to-copy examples.
+
 
 Other Code
 ----------
 
-For a versatile, extensive, and newer fortran system see
+For a versatile, extensive, and newer fortran system for mtft see
 
      http://uniandes.academia.edu/gprieto
 
