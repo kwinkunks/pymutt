@@ -123,7 +123,8 @@ static PyObject* pymutt_mtft(PyObject* self,
                  reshaped, linevar,
                  tweights, tspectra);
 
-    retary = (PyArrayObject *) PyArray_SimpleNew(1, &outlen, NPY_DOUBLE);
+    npy_intp npy_ol = outlen;
+    retary = (PyArrayObject *) PyArray_SimpleNew(1, &npy_ol, NPY_DOUBLE);
     memcpy(retary->data, mtpower, outlen * sizeof(double));
     free(mtpower);
     PyDict_SetItemString(rd, "power", (PyObject *) retary);
@@ -167,7 +168,7 @@ static PyObject* pymutt_mtft(PyObject* self,
 
     if(tweights) {
 
-        int tdims[2];
+        npy_intp tdims[2];
         tdims[1] = outlen;
         tdims[0] = nwin;
         retary = (PyArrayObject *) PyArray_SimpleNew(2, tdims, NPY_DOUBLE);
@@ -179,12 +180,12 @@ static PyObject* pymutt_mtft(PyObject* self,
 
     if(dodof || linedatap) {
 
-        retary = (PyArrayObject *) PyArray_SimpleNew(1, &outlen, NPY_DOUBLE);
+        retary = (PyArrayObject *) PyArray_SimpleNew(1, &npy_ol, NPY_DOUBLE);
         memcpy(retary->data, dof, outlen * sizeof(double));
         free(dof);
         PyDict_SetItemString(rd, "dof", (PyObject *) retary);
         Py_DECREF(retary);
-        retary = (PyArrayObject *) PyArray_SimpleNew(1, &outlen, NPY_DOUBLE);
+        retary = (PyArrayObject *) PyArray_SimpleNew(1, &npy_ol, NPY_DOUBLE);
         memcpy(retary->data, Fvalues, outlen * sizeof(double));
         free(Fvalues);
         PyDict_SetItemString(rd, "F", (PyObject *) retary);
@@ -198,25 +199,26 @@ static PyObject* pymutt_mtft(PyObject* self,
             // the C99 double complex and NPY_CDOUBLE have the same binary
             // format
 
-        retary = (PyArrayObject *) PyArray_SimpleNew(1, &nlines, NPY_CDOUBLE);
-        memcpy(retary->data, lamp, nlines * sizeof(double complex));
-        free(lamp);
-        PyDict_SetItemString(rd, "linea", (PyObject *) retary);
-        Py_DECREF(retary);
+      npy_intp nl = nlines;
+      retary = (PyArrayObject *) PyArray_SimpleNew(1, &nl, NPY_CDOUBLE);
+      memcpy(retary->data, lamp, nlines * sizeof(double complex));
+      free(lamp);
+      PyDict_SetItemString(rd, "linea", (PyObject *) retary);
+      Py_DECREF(retary);
 
-        retary = (PyArrayObject *) PyArray_SimpleNew(1, &nlines, NPY_DOUBLE);
+        retary = (PyArrayObject *) PyArray_SimpleNew(1, &nl, NPY_DOUBLE);
         memcpy(retary->data, flines, nlines * sizeof(double));
         free(flines);
         PyDict_SetItemString(rd, "linef", (PyObject *) retary);
         Py_DECREF(retary);
 
-        retary = (PyArrayObject *) PyArray_SimpleNew(1, &outlen, NPY_DOUBLE);
+        retary = (PyArrayObject *) PyArray_SimpleNew(1, &npy_ol, NPY_DOUBLE);
         memcpy(retary->data, reshaped, outlen * sizeof(double));
         free(reshaped);
         PyDict_SetItemString(rd, "reshaped", (PyObject *) retary);
         Py_DECREF(retary);
 
-        retary = (PyArrayObject *) PyArray_SimpleNew(1, &nlines, NPY_DOUBLE);
+        retary = (PyArrayObject *) PyArray_SimpleNew(1, &nl, NPY_DOUBLE);
         memcpy(retary->data, linevar, nlines * sizeof(double));
         free(linevar);
         PyDict_SetItemString(rd, "linevar", (PyObject *) retary);
