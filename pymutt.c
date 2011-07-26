@@ -195,16 +195,16 @@ static PyObject* pymutt_mtft(PyObject* self,
 
     if(linedatap) {
 
-            // this is the only place (so far) where we assume that
-            // the C99 double complex and NPY_CDOUBLE have the same binary
-            // format
+        // this is the only place (so far) where we assume that
+        // the C99 double complex and NPY_CDOUBLE have the same binary
+        // format
 
-      npy_intp nl = nlines;
-      retary = (PyArrayObject *) PyArray_SimpleNew(1, &nl, NPY_CDOUBLE);
-      memcpy(retary->data, lamp, nlines * sizeof(double complex));
-      free(lamp);
-      PyDict_SetItemString(rd, "linea", (PyObject *) retary);
-      Py_DECREF(retary);
+        npy_intp nl = nlines;
+        retary = (PyArrayObject *) PyArray_SimpleNew(1, &nl, NPY_CDOUBLE);
+        memcpy(retary->data, lamp, nlines * sizeof(double complex));
+        free(lamp);
+        PyDict_SetItemString(rd, "linea", (PyObject *) retary);
+        Py_DECREF(retary);
 
         retary = (PyArrayObject *) PyArray_SimpleNew(1, &nl, NPY_DOUBLE);
         memcpy(retary->data, flines, nlines * sizeof(double));

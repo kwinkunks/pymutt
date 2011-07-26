@@ -1,9 +1,3 @@
-//@+leo-ver=4
-//@+node:@file mtbase.c
-//@@language c
-//@@tabwidth -4
-//@+others
-//@+node:mtbase declarations
 #ifndef MT_STATIC
 #define DO_MTAP_SPEC_TYPE static
 #else
@@ -15,8 +9,6 @@
 
 static int mt_verbose = 0; // some debugging output
 
-//@-node:mtbase declarations
-//@+node:jtinvit_
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
@@ -34,9 +26,6 @@ static int mt_verbose = 0; // some debugging output
 #define max(a,b) ((a) >= (b) ? (a) : (b))
 
 #include "jtinvit.inc"
-
-//@-node:jtridib_
-//@+node:r2cdft
 
 
     //
@@ -80,8 +69,9 @@ static void r2cdft(const double *in, int in_len, int pad_len,
     }
 
     double* dptr = (double *) out;
+    int outlength = (finallen / 2) + 1;
+    memset(dptr, 0, 2 * outlength * sizeof(in[0]));
     memcpy(dptr + 1, in, in_len * sizeof(in[0]));
-    memset(dptr + in_len + 1, 0, (finallen - in_len) * sizeof(in[0]));
 
     rfftf(finallen, dptr + 1, fftpack_work);
 
@@ -126,13 +116,10 @@ static void r2cdft(const double *in, int in_len, int pad_len,
 }
 
 #endif
-//@-node:r2cdft
-//@+node:mt_multitap
 
-
-    /* 
-    ** currently returns tapers normalized so that h * h = 1
-    */ 
+/* 
+** currently returns tapers normalized so that h * h = 1
+*/ 
 
 static void mt_multitap(int num_points, int nwin, double *lam,
                         double npi, double *tapers, double *tapsum)
@@ -314,8 +301,6 @@ static void mt_multitap(int num_points, int nwin, double *lam,
 
     free(evecs);
 }
-//@-node:mt_multitap
-//@+node:hires
 
 // hires estimate: P&W 369a
 
@@ -344,8 +329,6 @@ static void hires(double *sqr_spec, double *el, int nwin,
 
     return;
 }
-//@-node:hires
-//@+node:adweight
 
 // thomson's algorithm for the adaptive spectrum estimate
 // P&W 370a ...
@@ -441,8 +424,6 @@ static int adweight(double *sqr_spec, double *dcf,
 
     return jitter;
 }
-//@-node:adweight
-//@+node:get_F_values
 
 static void get_F_values(complex double *s, int nf, int nwin,
                          double *Fvalue, double *b)
@@ -479,8 +460,6 @@ static void get_F_values(complex double *s, int nf, int nwin,
     free(amu);
     return;
 }
-//@-node:get_F_values
-//@+node:do_mtap_spec
 
 DO_MTAP_SPEC_TYPE
 void do_mtap_spec(double* data, int truelen, double dt, int kind,
@@ -773,7 +752,3 @@ void do_mtap_spec(double* data, int truelen, double dt, int kind,
     free(tapsum);
     free(tapers);
 }
-//@-node:do_mtap_spec
-//@-others
-//@-node:@file mtbase.c
-//@-leo

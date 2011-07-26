@@ -2,7 +2,7 @@
       ocean wave time series from Percival & Walden, figure 295.
       source: Applied Physics Laboratory (Andy Jessup)
 
-      This example computes an adaptive multi-taper (kind == 1) result
+      This example computes an adaptive multi-taper (kind == 2) result
       that should be compared to the heavy curve in P&W figure 373(c).
 ''' 
 
