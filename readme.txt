@@ -53,6 +53,10 @@ For a versatile, extensive, and newer fortran system for mtft see
 
      http://uniandes.academia.edu/gprieto
 
+For a python interface to the preceding see
+
+    https://svn.geophysik.uni-muenchen.de/trac/mtspecpy/wiki
+
 
 References
 ----------
