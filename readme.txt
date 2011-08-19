@@ -56,6 +56,9 @@ For a versatile, extensive, and newer fortran system for mtft see
 For a python interface to the preceding see
 
     https://svn.geophysik.uni-muenchen.de/trac/mtspecpy/wiki
+	
+See http://nipy.org/nitime/ for an extensive time-series analysis package including
+multi-taper spectral estimation.
 
 
 References
