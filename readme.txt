@@ -10,18 +10,22 @@ Park (1995) and uses the conventions of Percival and Walden (1993).
 Pymutt requires numpy.  Most of the examples also require matplotlib.
 
 Pymutt builds and installs properly on
-    - win7-64 using 32-bit python
-    - linux-64 using 64-bit python
+    * win7-64 using 32-bit python
+    * linux-64 using 64-bit python
 It almost surely installs properly on linux-32 and win-32.  It
 fails on win7-64 using 64-bit python.
 
 To install pymutt execute
 
-    python setup.py build
+
+    `python setup.py build`
+
 
 and as root or administrator
 
-    python setup.py install
+
+    `python setup.py install`
+
 
 On windows I used mingw and the mingw shell.
 
@@ -30,12 +34,15 @@ On windows I used mingw and the mingw shell.
 
 Go to the examples subdirectory and execute
 
-    python runme.py
+
+    `python runme.py`
+    
 
 and it will print out help for runme.py as well as the self docs for
 pymutt.  To run a test case try
 
-    python runme.py -N 3
+
+    `python runme.py -N 3`
 
 and you should get a figure closely resembling Percival and Walden
 figure 512.
@@ -47,12 +54,16 @@ Look at the code in examples/minimalexamples.py for some easy-to-copy examples.
 
 For a versatile, extensive, and newer fortran system for mtft see
 
-     http://uniandes.academia.edu/gprieto
+
+    http://uniandes.academia.edu/gprieto
+
 
 For a python interface to the preceding see
 
+
     https://svn.geophysik.uni-muenchen.de/trac/mtspecpy/wiki
 	
+   
 See http://nipy.org/nitime/ for an extensive time-series analysis package including
 multi-taper spectral estimation.
 
