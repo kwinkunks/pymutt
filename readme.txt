@@ -1,13 +1,11 @@
-About Pymutt
-------------
+== About Pymutt ==
 
 Pymutt is an implementation of Thomson (1982) multi-taper fourier spectral
 estimator plus a python interface.  The core code is due to Lees and
 Park (1995) and uses the conventions of Percival and Walden (1993).
 
 
-Installation
-------------
+== Installation ==
 
 Pymutt requires numpy.  Most of the examples also require matplotlib.
 
@@ -28,8 +26,7 @@ and as root or administrator
 On windows I used mingw and the mingw shell.
 
 
-Usage
------
+== Usage ==
 
 Go to the examples subdirectory and execute
 
@@ -46,8 +43,7 @@ figure 512.
 Look at the code in examples/minimalexamples.py for some easy-to-copy examples.
 
 
-Other Code
-----------
+== Other Code ==
 
 For a versatile, extensive, and newer fortran system for mtft see
 
@@ -61,8 +57,7 @@ See http://nipy.org/nitime/ for an extensive time-series analysis package includ
 multi-taper spectral estimation.
 
 
-References
-----------
+== References ==
 
 Lees, J.M., and J. Parks (1995), Multi-taper Spectral Analysis: A
     Stand-alone C Subroutine, Computers and Geology, 21(2), 199-236.
