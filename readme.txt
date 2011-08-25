@@ -7,14 +7,12 @@ Park (1995) and uses the conventions of Percival and Walden (1993).
 
 == Requirements ==
 
-Building and installing pymutt requires the python-dev package.  Using
-pymutt requires numpy.  Most of the examples also require matplotlib.
+ * Building pymutt requires the python-dev package.
+ * Using pymutt requires numpy.
+ * Most of the examples also require matplotlib.
 
 
 == Installation ==
-
-Building and installing pymutt requires the python-dev package.  Using
-pymutt requires numpy.  Most of the examples also require matplotlib.
 
 Pymutt builds and installs properly on
     * win7-64 using 32-bit python
