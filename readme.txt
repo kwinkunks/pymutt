@@ -1,13 +1,20 @@
 == About Pymutt ==
 
-Pymutt is an implementation of Thomson (1982) multi-taper fourier spectral
+Pymutt is an implementation of Thomson's (1982) multi-taper fourier spectral
 estimator plus a python interface.  The core code is due to Lees and
 Park (1995) and uses the conventions of Percival and Walden (1993).
 
 
+== Requirements ==
+
+Building and installing pymutt requires the python-dev package.  Using
+pymutt requires numpy.  Most of the examples also require matplotlib.
+
+
 == Installation ==
 
-Pymutt requires numpy.  Most of the examples also require matplotlib.
+Building and installing pymutt requires the python-dev package.  Using
+pymutt requires numpy.  Most of the examples also require matplotlib.
 
 Pymutt builds and installs properly on
     * win7-64 using 32-bit python
@@ -15,7 +22,7 @@ Pymutt builds and installs properly on
 It almost surely installs properly on
     * linux-32 and
     * win-32.
-It fails on win7-64 using 64-bit python.
+It currently fails on win7-64 using 64-bit python.
 
 To install pymutt execute
 
@@ -34,7 +41,6 @@ Go to the examples subdirectory and execute
 
     {{{python runme.py}}}
     
-
 and it will print out help for runme.py as well as the self docs for
 pymutt.  To run a test case try
 
@@ -43,7 +49,8 @@ pymutt.  To run a test case try
 and you should get a figure closely resembling Percival and Walden
 figure 512.
 
-Look at the code in examples/minimalexamples.py for some easy-to-copy examples.
+Look at the code in *examples/minimalexamples.py* for some
+easy-to-copy examples.
 
 
 == Other Code ==
